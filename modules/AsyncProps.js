@@ -20,8 +20,12 @@ function eachComponents(components, iterator) {
 function filterAndFlattenComponents(components) {
   var flattened = []
   eachComponents(components, (Component) => {
-    if (Component && Component.loadProps)
+    if (Component && Component.loadProps) {
       flattened.push(Component)
+    }
+    else if (Component && Component.WrappedComponent && Component.WrappedComponent.loadProps) {
+      flattened.push(Component.WrappedComponent)
+    }
   })
   return flattened
 }

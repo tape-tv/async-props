@@ -137,7 +137,12 @@ const AsyncPropsContainer = React.createClass({
   },
 
   render() {
-    const { Component, routerProps, ...props } = this.props
+    const { Component, routerProps } = this.props
+    
+    let props = this.props
+    delete props.Component
+    delete props.routerProps
+    
     const { propsAndComponents, loading, reloadComponent } = this.context.asyncProps
     const asyncProps = lookupPropsForComponent(Component, propsAndComponents)
     const reload = () => reloadComponent(Component)
